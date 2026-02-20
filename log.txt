@@ -1,0 +1,317 @@
+PS GitOPS> go mod init webserverfc
+go: creating new go.mod: module webserverfc
+PS GitOPS> go run main.go
+PS GitOPS> go run main.go
+PS GitOPS> go run main.go
+PS GitOPS> go run main.go
+exit status 0xc000013a
+PS GitOPS> docker build -t brunomarch/gitopsfc:latest .
+[+] Building 27.9s (10/11)                                                                                       docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                             0.1s
+ => => transferring dockerfile: 228B                                                                                             0.0s
+ => WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)                                                   0.1s
+ => [internal] load metadata for docker.io/library/golang:1.19                                                                   2.2s
+ => [auth] library/golang:pull token for registry-1.docker.io                                                                    0.0s
+ => [internal] load .dockerignore                                                                                                0.0s
+ => => transferring context: 2B                                                                                                  0.0s
+ => [build 1/4] FROM docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a      24.2s
+ => => resolve docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a             0.0s
+ => => sha256:5ec11cb68eac452710eadb46df5e6cf6ead699755303758bf1e262e47b013417 155B / 155B                                       0.3s
+ => => sha256:0808c64687902329ac64331848304f6f0bc14b86d6be46bccf79292b564f6587 149.14MB / 149.14MB                              18.3s
+ => => sha256:190fa1651026077cee00b53a754acbe0dc734b99255c6b274e798f6cd877ae18 92.27MB / 92.27MB                                11.1s
+ => => sha256:9f13f5a53d118643c1f1ff294867c09f224d00edca21f56caa71c2321f8ca004 64.11MB / 64.11MB                                 7.8s
+ => => sha256:00046d1e755ea94fa55a700ca9a10597e4fac7c47be19d970a359b0267a51fbf 24.03MB / 24.03MB                                 3.8s
+ => => sha256:012c0b3e998c1a0c0bedcf712eaaafb188580529dd026a04aa1ce13fdb39e42b 49.56MB / 49.56MB                                 5.7s
+ => => extracting sha256:012c0b3e998c1a0c0bedcf712eaaafb188580529dd026a04aa1ce13fdb39e42b                                        2.4s
+ => => extracting sha256:00046d1e755ea94fa55a700ca9a10597e4fac7c47be19d970a359b0267a51fbf                                        0.9s
+ => => extracting sha256:9f13f5a53d118643c1f1ff294867c09f224d00edca21f56caa71c2321f8ca004                                       11.0s
+ => => extracting sha256:190fa1651026077cee00b53a754acbe0dc734b99255c6b274e798f6cd877ae18                                        0.0s
+ => => extracting sha256:0808c64687902329ac64331848304f6f0bc14b86d6be46bccf79292b564f6587                                        5.1s
+ => => extracting sha256:5ec11cb68eac452710eadb46df5e6cf6ead699755303758bf1e262e47b013417                                        0.1s
+ => [stage-1 1/2] WORKDIR /app                                                                                                   0.0s
+ => [internal] load build context                                                                                                0.1s
+ => => transferring context: 540B                                                                                                0.0s
+ => [build 2/4] WORKDIR /app                                                                                                     0.2s
+ => [build 3/4] COPY . .                                                                                                         0.1s
+ => ERROR [build 4/4] RUN CGOOS=linux GOARCH=amd64 go build -o server                                                            1.1s
+------
+ > [build 4/4] RUN CGOOS=linux GOARCH=amd64 go build -o server:
+1.011 go: errors parsing go.mod:
+1.011 /app/go.mod:3: invalid go version '1.25.0': must match format 1.23
+------
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+Dockerfile:4
+--------------------
+   2 |     WORKDIR /app
+   3 |     COPY . .
+   4 | >>> RUN CGOOS=linux GOARCH=amd64 go build -o server
+   5 |
+   6 |     FROM scratch
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c CGOOS=linux GOARCH=amd64 go build -o server" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/kpvpv0suryjdoggtco2r2dfdg
+PS GitOPS> docker build -t brunomarch/gitopsfc:latest .
+[+] Building 3.6s (11/11) FINISHED                                                                               docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                             0.0s
+ => => transferring dockerfile: 228B                                                                                             0.0s
+ => WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)                                                   0.0s
+ => [internal] load metadata for docker.io/library/golang:1.19                                                                   0.7s
+ => [internal] load .dockerignore                                                                                                0.0s
+ => => transferring context: 2B                                                                                                  0.0s
+ => CACHED [stage-1 1/2] WORKDIR /app                                                                                            0.0s
+ => [build 1/4] FROM docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a       0.0s
+ => => resolve docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a             0.0s
+ => [internal] load build context                                                                                                0.0s
+ => => transferring context: 122B                                                                                                0.0s
+ => CACHED [build 2/4] WORKDIR /app                                                                                              0.0s
+ => [build 3/4] COPY . .                                                                                                         0.1s
+ => [build 4/4] RUN CGOOS=linux GOARCH=amd64 go build -o server                                                                  1.7s
+ => [stage-1 2/2] COPY --from=build /app/server .                                                                                0.1s
+ => exporting to image                                                                                                           0.9s
+ => => exporting layers                                                                                                          0.5s
+ => => exporting manifest sha256:39512a954c945aad5016fa77527aba1e8ee0f672b96d31b9a4c660c48a3d9aba                                0.0s
+ => => exporting config sha256:03d4a2ff4e03375f2e44a2588c5c99ddcd2851b82f318f8cd833e7f3ebff60f7                                  0.0s
+ => => exporting attestation manifest sha256:85f2811596c8a1bc8ec5c4dd9a7db6fd7d5d239d40948fb59e74aafd5d1eb877                    0.0s
+ => => exporting manifest list sha256:7e365fee515b38700a353ed623d8cc64155c872bc8771ad7d7878169ff0cfeaf                           0.0s
+ => => naming to docker.io/brunomarch/gitopsfc:latest                                                                            0.0s
+ => => unpacking to docker.io/brunomarch/gitopsfc:latest                                                                         0.1s
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/q9bbsmkh8724sy0tk8kx091nz
+PS GitOPS> docker run --rm -p 8080:8080 brunomarch/gitopsfc:latest
+exec ./server: no such file or directory
+PS GitOPS> docker build -t brunomarch/gitopsfc:latest .
+[+] Building 5.4s (15/15) FINISHED                                                                               docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                             0.1s
+ => => transferring dockerfile: 222B                                                                                             0.0s
+ => WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)                                                   0.1s
+ => [internal] load metadata for docker.io/library/alpine:3.18                                                                   1.6s
+ => [internal] load metadata for docker.io/library/golang:1.19                                                                   0.9s
+ => [auth] library/golang:pull token for registry-1.docker.io                                                                    0.0s
+ => [auth] library/alpine:pull token for registry-1.docker.io                                                                    0.0s
+ => [internal] load .dockerignore                                                                                                0.0s
+ => => transferring context: 2B                                                                                                  0.0s
+ => [build 1/4] FROM docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a       0.0s
+ => => resolve docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a             0.0s
+ => [stage-1 1/3] FROM docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f     2.3s
+ => => resolve docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f             0.0s
+ => => sha256:44cf07d57ee4424189f012074a59110ee2065adfdde9c7d9826bebdffce0a885 3.15MB / 3.42MB                                   3.5s
+ => => extracting sha256:44cf07d57ee4424189f012074a59110ee2065adfdde9c7d9826bebdffce0a885                                        0.2s
+ => [internal] load build context                                                                                                0.0s
+ => => transferring context: 274B                                                                                                0.0s
+ => CACHED [build 2/4] WORKDIR /app                                                                                              0.0s
+ => [build 3/4] COPY . .                                                                                                         0.0s
+ => [build 4/4] RUN CGOOS=linux GOARCH=amd64 go build -o server                                                                  2.0s
+ => [stage-1 2/3] WORKDIR /app                                                                                                   0.1s
+ => [stage-1 3/3] COPY --from=build /app/server .                                                                                0.1s
+ => exporting to image                                                                                                           0.8s
+ => => exporting layers                                                                                                          0.5s
+ => => exporting manifest sha256:a17ed23f534b2518be3363018592f83c5167c62a280e78e39c6b30743e243264                                0.0s
+ => => exporting config sha256:0f8b2cc58e0526c704a5b0824e90f519be698f94dff0ddf0354c84c9169f0e00                                  0.0s
+ => => exporting attestation manifest sha256:9f0e2fd55dc9c2c00300ad6e2256140cb28a1a044e7e0a83b0bd33de5f73e3e8                    0.0s
+ => => exporting manifest list sha256:c9137a83d2f1f69478d7b5e90290ea1ee92c365f5b590ee54d7aafd1ee98f620                           0.0s
+ => => naming to docker.io/brunomarch/gitopsfc:latest                                                                            0.0s
+ => => unpacking to docker.io/brunomarch/gitopsfc:latest                                                                         0.1s
+
+ 1 warning found (use docker --debug to expand):
+ - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 1)
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ygy31ltdf0187y93jn5io1bp8
+PS GitOPS> docker run --rm -p 8080:8080 brunomarch/gitopsfc:latest
+exec ./server: no such file or directory
+PS GitOPS> docker build -t brunomarch/gitopsfc:latest .
+[+] Building 6.3s (13/13) FINISHED                                                                               docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                             0.0s
+ => => transferring dockerfile: 279B                                                                                             0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.18                                                                   0.7s
+ => [internal] load metadata for docker.io/library/golang:1.19                                                                   0.7s
+ => [internal] load .dockerignore                                                                                                0.0s
+ => => transferring context: 2B                                                                                                  0.0s
+ => [build 1/4] FROM docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a       0.1s
+ => => resolve docker.io/library/golang:1.19@sha256:3025bf670b8363ec9f1b4c4f27348e6d9b7fec607c47e401e40df816853e743a             0.0s
+ => [stage-1 1/3] FROM docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f     0.1s
+ => => resolve docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f             0.0s
+ => [internal] load build context                                                                                                0.0s
+ => => transferring context: 331B                                                                                                0.0s
+ => CACHED [build 2/4] WORKDIR /app                                                                                              0.0s
+ => [build 3/4] COPY . .                                                                                                         0.0s
+ => [build 4/4] RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server                                                     4.0s
+ => CACHED [stage-1 2/3] WORKDIR /app                                                                                            0.0s
+ => [stage-1 3/3] COPY --from=build /app/server .                                                                                0.1s
+ => exporting to image                                                                                                           0.9s
+ => => exporting layers                                                                                                          0.6s
+ => => exporting manifest sha256:0432691f86048ace8fbf48bad50e180cac487735e3859a067a57c3b4c2e7060e                                0.0s
+ => => exporting config sha256:78f4a01b13432f2027030c3b6a4629427eceb7a4795483178bef31faf8ba4db9                                  0.0s
+ => => exporting attestation manifest sha256:ee93320d88f44bc5c7006d365d844ddb8018be4b61aeae120ff96ec16e932d41                    0.0s
+ => => exporting manifest list sha256:2eeba88d9e9855898fdf2c7f38ad40be2ea3430e28e368451bbd8e3193d39ebb                           0.0s
+ => => naming to docker.io/brunomarch/gitopsfc:latest                                                                            0.0s
+ => => unpacking to docker.io/brunomarch/gitopsfc:latest                                                                         0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/cgpb9inc4lttk1vvxnaqcd7xh
+PS GitOPS> docker run --rm -p 8080:8080 brunomarch/gitopsfc:latest
+PS GitOPS> docker push brunomarch/gitopsfc:latest
+The push refers to repository [docker.io/brunomarch/gitopsfc]
+44cf07d57ee4: Pushed
+035eea0e5089: Pushed
+680c745dd4a4: Pushed
+080d921c2e83: Pushed
+latest: digest: sha256:2eeba88d9e9855898fdf2c7f38ad40be2ea3430e28e368451bbd8e3193d39ebb size: 855
+PS GitOPS> git init
+Initialized empty Git repository in C:/Users/MRK/Documents/NEKI/estudos/GitOPS/.git/
+PS GitOPS> git add .
+warning: in the working copy of 'go.mod', LF will be replaced by CRLF the next time Git touches it
+PS GitOPS> git add .
+PS GitOPS> git commit -m "first commit"
+[master (root-commit) 81fbc73] first commit
+ 4 files changed, 48 insertions(+)
+ create mode 100644 .github/workflows/cd.yaml
+ create mode 100644 Dockerfile
+ create mode 100644 go.mod
+ create mode 100644 main.go
+PS GitOPS> git branch -M main
+PS GitOPS> git remote add origin https://github.com/brunomarchiori-git/gitops.git
+PS GitOPS> git push -u origin main
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (8/8), 1.03 KiB | 529.00 KiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/brunomarchiori-git/gitops.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS> git add .
+PS GitOPS> git commit -m "oi"
+[main c090659] oi
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+PS GitOPS> git push -u origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 592 bytes | 592.00 KiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/brunomarchiori-git/gitops.git
+   81fbc73..c090659  main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS> git add .
+PS GitOPS> git commit -m "oi2"
+[main 6c27909] oi2
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS GitOPS> git push -u origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 482 bytes | 482.00 KiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/brunomarchiori-git/gitops.git
+   c090659..6c27909  main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS> docker push brunomarch/gitopsfc:latest^C
+PS GitOPS> git add .
+PS GitOPS> git commit -m "oi3"
+[main 5a01a9d] oi3
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS GitOPS> git push -u origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 501 bytes | 501.00 KiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/brunomarchiori-git/gitops.git
+   6c27909..5a01a9d  main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS> kind create cluster --name gitopsfc
+Creating cluster "gitopsfc" ...
+ ✓ Ensuring node image (kindest/node:v1.30.0) 🖼
+ ✓ Preparing nodes 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-gitopsfc"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-gitopsfc
+
+Have a nice day! 👋
+PS GitOPS> brw install kustomize
+brw: The term 'brw' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS GitOPS> brew install kustomize
+brew: The term 'brew' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS GitOPS> kustomize version
+kustomize: The term 'kustomize' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS GitOPS> kubectl kustomize --help
+Build a set of KRM resources using a 'kustomization.yaml' file. The DIR argument must be a path to a directory
+containing 'kustomization.yaml', or a git repository URL with a path suffix specifying same with respect to the
+repository root. If DIR is omitted, '.' is assumed.
+
+Examples:
+  # Build the current working directory
+  kubectl kustomize
+
+  # Build some shared configuration directory
+  kubectl kustomize /home/config/production
+
+  # Build from github
+  kubectl kustomize https://github.com/kubernetes-sigs/kustomize.git/examples/helloWorld?ref=v1.0.6
+
+Options:
+    --as-current-user=false:
+        use the uid and gid of the command executor to run the function in the container
+
+    --enable-alpha-plugins=false:
+        enable kustomize plugins
+
+    --enable-helm=false:
+        Enable use of the Helm chart inflator generator.
+
+    -e, --env=[]:
+        a list of environment variables to be used by functions
+
+    --helm-api-versions=[]:
+        Kubernetes api versions used by Helm for Capabilities.APIVersions
+
+    --helm-command='helm':
+        helm command (path to executable)
+
+    --helm-debug=false:
+        Enable debug output from the Helm chart inflator generator.
+
+    --helm-kube-version='':
+        Kubernetes version used by Helm for Capabilities.KubeVersion
+
+    --load-restrictor='LoadRestrictionsRootOnly':
+        if set to 'LoadRestrictionsNone', local kustomizations may load files from outside their root. This does,
+        however, break the relocatability of the kustomization.
+
+    --mount=[]:
+        a list of storage options read from the filesystem
+
+    --network=false:
+        enable network access for functions that declare it
+
+    --network-name='bridge':
+        the docker network to run the container in
+
+    -o, --output='':
+        If specified, write output to this path.
+
+Usage:
+  kubectl kustomize DIR [flags] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+PS GitOPS>

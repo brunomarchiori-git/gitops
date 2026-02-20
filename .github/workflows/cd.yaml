@@ -26,3 +26,26 @@ jobs:
           context: .
           push: true
           tags: brunomarch/gitopsfc:${{ github.sha }}, brunomarch/gitopsfc:latest
+      
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          version: '4.5.4'
+
+      - name: Update Kuubernetes resources
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          kustomize edit set image goserver=brunomarch/gitopsfc:${{ github.sha }}
+
+      - name: Commit
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git commit -am "Bump docker version"
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: brunomarchiori-git/gitops
