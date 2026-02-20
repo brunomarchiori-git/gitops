@@ -25,4 +25,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: mrkwebserver:${{ github.sha }}, mrkwebserver:latest
+          tags: ${{ github.sha }}, latest
