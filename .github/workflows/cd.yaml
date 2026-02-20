@@ -25,4 +25,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.sha }}, latest
+          tags: brunomarch/gitopsfc:${{ github.sha }}, brunomarch/gitopsfc:latest
