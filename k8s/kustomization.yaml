@@ -6,4 +6,4 @@ resources:
 images:
 - name: goserver
   newName: brunomarch/gitopsfc
-  newTag: aaaaaaaaaa
+  newTag: aaaaaaa
