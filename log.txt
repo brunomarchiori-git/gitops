@@ -315,3 +315,146 @@ Usage:
 
 Use "kubectl options" for a list of global command-line options (applies to all commands).
 PS GitOPS>
+PS GitOPS> kustomize edit set image goserver=brunomarch/gitopsfc:${{ github.sha }}
+ParserError:
+Line |
+   1 |  kustomize edit set image goserver=brunomarch/gitopsfc:${{ github.sha  …
+     |                                                           ~
+     | Use `{ instead of { in variable names.
+PS GitOPS> ls
+
+    Directory: C:\Users\MRK\Documents\NEKI\estudos\GitOPS
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          20/02/2026    15:59                .github
+d----          20/02/2026    16:51                k8s
+-a---          20/02/2026    15:56            240 Dockerfile
+-a---          20/02/2026    15:52             28 go.mod
+-a---          20/02/2026    16:50          23403 log.txt
+-a---          20/02/2026    15:48            209 main.go
+
+PS GitOPS> cd .\k8s\
+PS k8s> kustomize edit set image goserver=brunomarch/gitopsfc:${{ github.sha }}
+ParserError:
+Line |
+   1 |  kustomize edit set image goserver=brunomarch/gitopsfc:${{ github.sha  …
+     |                                                           ~
+     | Use `{ instead of { in variable names.
+PS k8s> kustomize edit set image goserver=brunomarch/gitopsfc:aaaaaaaaaa
+kustomize: The term 'kustomize' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS k8s> kubectl kustomize edit set image goserver=brunomarch/gitopsfc:aaaaaaaaaa
+error: specify one path to kustomization.yaml
+PS k8s> curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.ps1 | powershell
+Windows PowerShell
+Copyright (C) Microsoft Corporation. Todos os direitos reservados.
+
+Experimente a nova plataforma cruzada PowerShell https://aka.ms/pscore6
+
+PS C:\Users\MRK\Documents\NEKI\estudos\GitOPS\k8s> 404: Not Found404: : O termo '404:' não é reconhecido como nome de cmdlet, função, arquivo de script
+ou programa operável. Verifique a grafia do nome ou, se um caminho tiver sido incluído,
+veja se o caminho está correto e tente novamente.
+No linha:1 caractere:1
++ 404: Not Found
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (404::String) [], CommandNotFoundExceptio
+   n
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\MRK\Documents\NEKI\estudos\GitOPS\k8s>
+PS k8s> kustomize version
+v5.8.1
+PS k8s> kustomize edit set image goserver=brunomarch/gitopsfc:aaaaaaaaaa
+PS k8s> git add .
+warning: in the working copy of 'k8s/kustomization.yaml', LF will be replaced by CRLF the next time Git touches it
+PS k8s> cd ..
+PS GitOPS> git add .
+PS GitOPS> git commit -m "oi4"
+[main 69a94e7] oi4
+ 5 files changed, 382 insertions(+), 1 deletion(-)
+ create mode 100644 k8s/deployment.yaml
+ create mode 100644 k8s/kustomization.yaml
+ create mode 100644 k8s/service.yaml
+ create mode 100644 log.txt
+PS GitOPS> git push -u origin main
+Enumerating objects: 14, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (10/10), 6.00 KiB | 1.50 MiB/s, done.
+Total 10 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/brunomarchiori-git/gitops.git
+   5a01a9d..69a94e7  main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS> cd .\k8s\
+PS k8s> kubectl apply -f .
+deployment.apps/goserver created
+service/goserver-service created
+error: resource mapping not found for name: "" namespace: "" from "kustomization.yaml": no matches for kind "Kustomization" in version "kustomize.config.k8s.io/v1beta1"
+ensure CRDs are installed first
+PS k8s> kubectl apply -k .
+service/goserver-service unchanged
+deployment.apps/goserver configured
+PS k8s> git add .
+PS k8s> git commit -m "oi5"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+PS k8s> git add .
+warning: in the working copy of 'k8s/kustomization.yaml', LF will be replaced by CRLF the next time Git touches it
+PS k8s> git add .
+PS k8s> git commit -m "oi5"
+[main a8cfabe] oi5
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+PS k8s> git push -u origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 407 bytes | 407.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/brunomarchiori-git/gitops.git
+   69a94e7..a8cfabe  main -> main
+branch 'main' set up to track 'origin/main'.
+PS k8s> git add .
+PS k8s> git commit -m "oi6"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   ../.github/workflows/cd.yaml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS k8s> git add .
+PS k8s> git commit -m "oi6"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   ../.github/workflows/cd.yaml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS k8s> cd ..
+PS GitOPS> git add .
+PS GitOPS> git commit -m "oi6"
+[main a20825f] oi6
+ 1 file changed, 1 insertion(+)
+PS GitOPS> git push -u origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 395 bytes | 395.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/brunomarchiori-git/gitops.git
+   a8cfabe..a20825f  main -> main
+branch 'main' set up to track 'origin/main'.
+PS GitOPS>
